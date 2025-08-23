@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { assets, facilityIcons, roomsDummyData } from "../assets/assets";
+import {
+  assets,
+  facilityIcons,
+  roomCommonData,
+  roomsDummyData,
+} from "../assets/assets";
 import StarRating from "../components/StarRating";
 
 const RoomDetails = () => {
@@ -86,19 +91,117 @@ const RoomDetails = () => {
             </div>
           </div>
 
-
           {/* Room Price */}
           <p className="text-2xl font-medium">${room.pricePerNight}/night</p>
         </div>
+
+        {/* checkIn checkOut form */}
+        <form
+          className="flex flex-col md:flex-row items-start md:items-center justify-between
+         bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-6 rounded-xl mx-auto mt-16 max-w-6xl"
+        >
+          <div className="flex flex-col flex-wrap md:flex-row items-start md:items-center gap-4 md:gap-10 text-gray-500">
+            <div className="flex flex-col">
+              <label className="font-medium" htmlFor="checkInDate">
+                Check-In
+              </label>
+              <input
+                className="w-full rounded border-gray-300 px-3 py-2 mt-1.5 outline-none"
+                type="date"
+                id="checkInDate"
+                placeholder="check-In"
+                required
+              />
+            </div>
+
+            <div className="w-px h-15 bg-gray-300/70 max-md:hidden"></div>
+
+            <div className="flex flex-col">
+              <label className="font-medium" htmlFor="checkOutDate">
+                Check-Out
+              </label>
+              <input
+                className="w-full rounded border-gray-300 px-3 py-2 mt-1.5 outline-none"
+                type="date"
+                id="checkOutDate"
+                placeholder="check-Out"
+                required
+              />
+            </div>
+
+            <div className="w-px h-15 bg-gray-300/70 max-md:hidden"></div>
+
+            <div className="flex flex-col">
+              <label className="font-medium" htmlFor="guests">
+                Guests
+              </label>
+              <input
+                className="max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none"
+                type="number"
+                id="guests"
+                placeholder="0"
+                required
+              />
+            </div>
+          </div>
+          <button
+            className="bg-primary hover:bg-primary-dull active:scale-95 transition-all text-white rounded-md max-md:w-full max-md:mt-6 md:px-25 py-3 md:py-4 text-base cursor-pointer"
+            type="submit"
+          >
+            Check Availability
+          </button>
+        </form>
+
+        {/* Common specifications */}
+        <div className="mt-25 space-y-4">
+          {roomCommonData.map((spec, index) => (
+            <div key={index} className="flex items-start gap-2">
+              <img
+                className="w-6.5"
+                src={spec.icon}
+                alt={`${spec.title}-icon`}
+              />
+              <div>
+                <p className="text-base">{spec.title}</p>
+                <p className="text-gray-500">{spec.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="max-w-3xl border-y border-gray-300 my-15 py-10 text-gray-500">
+          <p>
+            Guests will be allocated on the ground floor according to
+            availability. you get a comfortable two bedroom apartment has a true
+            jjjuests will be allocated on the ground floor according to
+            availability. you get a comfortable two bedroom apartment has a true
+            jjj
+          </p>
+        </div>
+
+        {/* hosted by */}
+        <div className="flex flex-col items-start gap-4">
+          <div className="flex gap-4">
+            <img
+              className="h-14 w-14 md:h-18 md:w-18 rounded-full"
+              src={room.hotel.owner.image}
+              alt="Host"
+            />
+            <div>
+              <p className="text-lg md:text-xl">Hosted by {room.hotel.name}</p>
+              <div className="flex items-center mt-1">
+                <StarRating />
+                <p className="ml-2">200+ reviews</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button className="px-6 py-2.5 mt-4 rounded text-white bg-primary hover:bg-primary-dull transition-all cursor-pointer">
+          Contact Now
+        </button>
       </div>
     )
   );
-
-
-
-
-
-  
 };
 
 export default RoomDetails;
