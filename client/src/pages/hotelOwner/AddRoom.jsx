@@ -34,7 +34,7 @@ const AddRoom = () => {
       {/* upload area for images */}
       <p className="text-gray-800 mt-10">Images</p>
       <div className="grid grid-cols-2 sm:flex gap-4 my-2 fles-wrap">
-        {Object.keys(images).map((key)=> (
+        {Object.keys(images).map((key) => (
           <label htmlFor=""></label>
         ))}
       </div>
