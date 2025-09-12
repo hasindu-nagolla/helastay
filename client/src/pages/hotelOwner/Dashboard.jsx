@@ -3,7 +3,7 @@ import Title from "../../components/Title";
 import { assets, dashboardDummyData } from "../../assets/assets";
 
 const Dashboard = () => {
-  const [Dashboarddata, setDashboarddata] = useState(dashboardDummyData);
+  const [DashboardData, setDashboardData] = useState(dashboardDummyData);
 
   return (
     <div>
@@ -25,7 +25,7 @@ const Dashboard = () => {
           <div className="flex flex-col sm:ml-4 font-medium">
             <p>Total Bookings</p>
             <p className="text-neutral-400 text-base">
-              {Dashboarddata.totalBookings}
+              {DashboardData.totalBookings}
             </p>
           </div>
         </div>
@@ -38,9 +38,9 @@ const Dashboard = () => {
             className="max-sm:hidden h-10"
           />
           <div className="flex flex-col sm:ml-4 font-medium">
-            <p>Total Revnue</p>
+            <p>Total Revenue</p>
             <p className="text-neutral-400 text-base">
-              $ {Dashboarddata.totalRevenue}
+              $ {DashboardData.totalRevenue}
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@ const Dashboard = () => {
 
       {/* Recent Bookings */}
       <h2 className="text-xl text-blue-950/70 font-medium mb-5">
-        Recent Boooking
+        Recent Booking
       </h2>
 
       <div className="w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll">
@@ -69,7 +69,7 @@ const Dashboard = () => {
           </thead>
 
           <tbody className="text-sm">
-            {Dashboarddata.bookings.map((item, index) => (
+            {DashboardData.bookings.map((item, index) => (
               <tr key={index}>
                 <td className="py-3 px-4 text-gray-700 border-t border-gray-300">
                   {item.user.username}
