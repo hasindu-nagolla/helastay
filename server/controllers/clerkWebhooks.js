@@ -22,9 +22,13 @@ const clerkWebhooks = async (req, res) => {
     // Build user record
     const userData = {
       _id: data.id,
-      email: data.email_addresses[0].email_address,
       username: (data.first_name || "") + " " + (data.last_name || ""),
-      image: data.image_url,
+      email:
+        (data.email_addresses[0] && data.email_addresses[0].email_address) ||
+        "",
+      image: data.image_url || data.profile_image_url || "",
+      role: "user", // Optional, can rely on default as well
+      recentSearchCities: [], // Always provide an array to satisfy schema
     };
 
     // Handle Clerk webhook events
@@ -43,7 +47,7 @@ const clerkWebhooks = async (req, res) => {
     }
     res.json({ success: true, message: "Webhook received" });
   } catch (error) {
-    console.log(error.message);
+    console.error("Webhook error:", error); // Show full error object
     res.status(400).json({ success: false, message: error.message });
   }
 };
