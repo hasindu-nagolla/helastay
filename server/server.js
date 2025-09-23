@@ -3,8 +3,9 @@ import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
-import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import bodyParser from "body-parser";
+import clerkWebhooks from "./controllers/clerkWebhooks.js";
+
 
 connectDB();
 
@@ -19,7 +20,7 @@ app.use(clerkMiddleware());
 
 app.post(
   "/api/clerk",
-  bodyParser.raw({ type: "application/json" }),
+  bodyParser.raw({ type: "application/json" }), // raw body for Svix verification
   clerkWebhooks
 );
 
