@@ -72,7 +72,12 @@ const clerkWebhooks = async (req, res) => {
 
     switch (type) {
       case "user.created": {
-        await User.create(userData);
+        await User.updateOne(
+          { _id: userData._id },
+          { $set: userData },
+          { upsert: true }
+        );
+
         break;
       }
       case "user.updated": {
