@@ -85,12 +85,7 @@ const clerkWebhooks = async (req, res) => {
         break;
       }
       case "user.deleted": {
-        const deleted = await User.findByIdAndDelete(data.id);
-        if (!deleted) {
-          // User not found, already deleted or never created
-          console.log(`User not found for deletion: ${data.id}`);
-        }
-
+        await User.findByIdAndDelete(data.id);
         break;
       }
       default:
