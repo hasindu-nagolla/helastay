@@ -3,9 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
-import bodyParser from "body-parser";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
-
 
 connectDB();
 
@@ -17,13 +15,7 @@ app.use(express.json());
 app.use(clerkMiddleware());
 
 // API to listen clerk webhooks
-
-app.post(
-  "/api/clerk",
-  bodyParser.raw({ type: "application/json" }), // raw body for Svix verification
-  clerkWebhooks
-);
-
+app.use("/api/clerk", clerkWebhooks);
 
 // Public route (no auth required)
 app.get("/", (req, res) => res.send("API is working..."));
